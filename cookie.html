@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Policy | Musico</title>
+    <meta name="description" content="Musico Cookie Policy — how session cookies are used by the bot dashboard.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .legal-wrap {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 7rem 5% 6rem;
+        }
+
+        .legal-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 12px;
+            border-radius: 99px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-subtle);
+            margin-bottom: 1.5rem;
+        }
+
+        .legal-wrap h1 {
+            font-size: 2.75rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .legal-meta {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .legal-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .legal-section h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legal-section h2 i {
+            color: var(--brand);
+            font-size: 0.9rem;
+        }
+
+        .legal-section p,
+        .legal-section li {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 0.6rem;
+        }
+
+        .legal-section ul {
+            padding-left: 1.25rem;
+            list-style: none;
+            margin-top: 0.5rem;
+        }
+
+        .legal-section ul li {
+            position: relative;
+            padding-left: 1.25rem;
+        }
+
+        .legal-section ul li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--brand);
+            font-size: 0.8rem;
+        }
+
+        .cookie-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+        }
+
+        .cookie-table th {
+            text-align: left;
+            padding: 10px 14px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .cookie-table td {
+            padding: 10px 14px;
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+        }
+
+        .cookie-table tr:nth-child(even) td {
+            background: rgba(255, 255, 255, 0.015);
+        }
+
+        .legal-footer-note {
+            margin-top: 3rem;
+            padding: 1.25rem 1.5rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .legal-footer-note a {
+            color: var(--brand);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="glow-orb top-left"></div>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-shapes text-brand"></i> Musico
+            </a>
+            <nav class="nav-links">
+                <a href="index.html#features">Features</a>
+                <a href="index.html#commands">Commands</a>
+                <a href="index.html#dashboard">Dashboard</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="index.html" class="btn btn-ghost btn-sm">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="legal-wrap">
+        <div class="legal-badge"><i class="fa-solid fa-cookie-bite"></i> Legal Document</div>
+        <h1>Cookie Policy</h1>
+        <p class="legal-meta">Last updated: March 2026 &nbsp;·&nbsp; Musico Technologies</p>
+
+        <div class="legal-section">
+            <h2><i class="fa-solid fa-circle-question"></i> 1. What Are Cookies?</h2>
+            <p>Cookies are small text files stored locally by your browser when you interact with a web application.
+                They enhance functionality, improve loading times, and keep sessions secure between page visits.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2><i class="fa-brands fa-discord"></i> 2. The Bot Itself</h2>
+            <p>The Musico bot operates natively within Discord and <strong style="color:var(--text-primary)">does not
+                    inject or utilize web browser cookies</strong> on user machines during Discord chat. Your Discord
+                client manages its own authentication independently.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2><i class="fa-solid fa-gauge-high"></i> 3. The Dashboard</h2>
+            <p>The Musico web dashboard uses strictly necessary cookies to function. These are set when you log in with
+                Discord OAuth2:</p>
+            <table class="cookie-table">
+                <thead>
+                    <tr>
+                        <th>Cookie Name</th>
+                        <th>Purpose</th>
+                        <th>Duration</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code style="font-family:var(--font-mono);">connect.sid</code></td>
+                        <td>Maintains your authenticated Discord session</td>
+                        <td>7 days</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="margin-top:0.85rem;">No analytics, advertising, or tracking cookies are used. We do not use
+                third-party cookie services.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2><i class="fa-solid fa-sliders"></i> 4. Managing Cookies</h2>
+            <p>You can adjust your browser settings to reject or clear cookies at any time. However, doing so will
+                disable dashboard login functionality, as the session cookie is required to identify you after Discord
+                authorization.</p>
+            <ul>
+                <li>Chrome: Settings → Privacy and Security → Cookies</li>
+                <li>Firefox: Settings → Privacy & Security → Cookies and Site Data</li>
+                <li>Edge: Settings → Cookies and site permissions</li>
+            </ul>
+        </div>
+
+        <div class="legal-section">
+            <h2><i class="fa-solid fa-rotate"></i> 5. Changes to This Policy</h2>
+            <p>We may update this Cookie Policy as the dashboard evolves. Any significant changes will be announced in
+                our support server.</p>
+        </div>
+
+        <div class="legal-footer-note">
+            <i class="fa-solid fa-circle-info text-brand"></i>&nbsp;
+            If you have any questions about our cookie usage, please reach out via our <a href="#">Support Server</a>.
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                &copy; 2026 Musico Technologies. All Rights Reserved. Not affiliated with Discord Inc.
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

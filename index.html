@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musico | Intelligent Discord Automation</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="glow-orb top-left"></div>
+    <div class="glow-orb bottom-right"></div>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fa-solid fa-shapes text-brand"></i> Musico
+            </div>
+            <nav class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#commands">Commands</a>
+                <a href="#dashboard">Dashboard</a>
+            </nav>
+            <div class="nav-actions" id="nav-auth">
+                <a href="/auth/login" class="btn btn-discord btn-sm" id="loginBtn">
+                    <i class="fa-brands fa-discord"></i> Login with Discord
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero target-reveal">
+            <div class="hero-layout">
+                <div class="hero-content">
+                    <div class="badge"><span class="pulse-dot"></span> Engine 2.0 is Live</div>
+                    <h1 class="gradient-text">Intelligent Automation for Growing Communities</h1>
+                    <p class="hero-desc">Elevate your Discord server with high-fidelity music streaming, advanced
+                        auto-moderation, and the power of Gemini AI.</p>
+                    <div class="hero-actions">
+                        <a href="https://discord.com/oauth2/authorize?client_id=1466430209019351050&permissions=8&integration_type=0&scope=applications.commands+bot"
+                            target="_blank" class="btn btn-primary">Get Started</a>
+                        <a href="#dashboard" class="btn btn-ghost">Explore Dashboard</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-group">
+                            <div class="stat-value"><span class="counter" data-target="2">0</span></div>
+                            <div class="stat-label">Active Servers</div>
+                        </div>
+                        <div class="stat-group">
+                            <div class="stat-value"><span class="counter" data-target="3">0</span></div>
+                            <div class="stat-label">Total Users</div>
+                        </div>
+                        <div class="stat-group">
+                            <div class="stat-value"><span class="counter" data-target="100">0</span>%</div>
+                            <div class="stat-label">Uptime</div>
+                        </div>
+                        <div class="stat-group">
+                            <div class="stat-value"><span class="counter" data-target="24">0</span>ms</div>
+                            <div class="stat-label">Latency</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="floating-mockup">
+                        <div class="mockup-header">
+                            <div class="mac-dots"><span></span><span></span><span></span></div>
+                            <div class="mockup-url"><i class="fa-solid fa-lock"></i> discord.com/oauth2/authorize</div>
+                        </div>
+                        <div class="mockup-body mockup-centered">
+                            <div class="discord-icon-bg"><i class="fa-brands fa-discord"></i></div>
+                            <h3 class="mockup-title">Authorize Musico</h3>
+                            <p class="mockup-desc">Musico wants to access your Discord account to perform automation
+                                tasks.</p>
+                            <a href="/auth/login" class="mockup-select"
+                                style="text-decoration:none; cursor:pointer;"><span>Select a server</span><i
+                                    class="fa-solid fa-chevron-down"></i></a>
+                            <a href="/auth/login" class="btn btn-discord btn-full mt-4">Authorize</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bento Features Grid -->
+        <section id="features" class="section-padding target-reveal">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Powerful Features. Minimal Effort.</h2>
+                    <p>Everything you need to manage your community, built into a single platform.</p>
+                </div>
+                <div class="bento-grid">
+                    <div class="bento-card col-span-2">
+                        <div class="card-icon"><i class="fa-solid fa-brain"></i></div>
+                        <h3>Gemini 2.0 AI Integration</h3>
+                        <p>Ask questions naturally and get exceptionally smart responses. Generate content and engage
+                            your community natively.</p>
+                        <div class="mockup-chat mt-4">
+                            <div class="chat-row user"><span>!ask What are the rules of chess?</span></div>
+                            <div class="chat-row bot"><span>Chess is a strategic board game played by two
+                                    players...</span></div>
+                        </div>
+                    </div>
+                    <div class="bento-card">
+                        <div class="card-icon"><i class="fa-solid fa-music"></i></div>
+                        <h3>High-Fidelity Audio</h3>
+                        <p>Buffer-free streaming from multiple sources. Control playback entirely through interactive
+                            buttons.</p>
+                    </div>
+                    <div class="bento-card">
+                        <div class="card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                        <h3>Advanced Moderation</h3>
+                        <p>A smart rule engine that kicks spam, warns unruly users, filters regex-based banned words,
+                            and logs actions.</p>
+                    </div>
+                    <div class="bento-card col-span-2">
+                        <div class="card-icon"><i class="fa-solid fa-chart-pie"></i></div>
+                        <h3>Deep Server Analytics</h3>
+                        <p>Track your server's growth and command usage. Make data-driven decisions to keep your users
+                            engaged.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Commands UI -->
+        <section id="commands" class="section-padding target-reveal">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Command Hub</h2>
+                    <p>Explore all available directives with clean syntax and built-in copy capabilities.</p>
+                </div>
+                <div class="cmd-interface">
+                    <div class="cmd-search-bar">
+                        <i class="fa-solid fa-magnifying-glass text-muted"></i>
+                        <input type="text" id="cmdSearch"
+                            placeholder="Search for commands, arguments, or descriptions...">
+                    </div>
+                    <div class="cmd-sidebar">
+                        <button class="cmd-tab active" data-tab="all"><i class="fa-solid fa-layer-group"></i> All
+                            Commands</button>
+                        <button class="cmd-tab" data-tab="music"><i class="fa-solid fa-music"></i> Music</button>
+                        <button class="cmd-tab" data-tab="moderation"><i class="fa-solid fa-shield"></i>
+                            Moderation</button>
+                        <button class="cmd-tab" data-tab="automod"><i class="fa-solid fa-robot"></i> Auto-Mod</button>
+                        <button class="cmd-tab" data-tab="utility"><i class="fa-solid fa-wrench"></i> Utility</button>
+                    </div>
+                    <div class="cmd-results custom-scroll" id="cmd-list"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Preview -->
+        <section id="dashboard" class="section-padding target-reveal">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Control everything from the Web</h2>
+                    <p>A sneak peek at the upcoming unified dashboard experience.</p>
+                </div>
+                <div class="dash-mockup">
+                    <div class="dash-topbar">
+                        <div class="mac-dots"><span></span><span></span><span></span></div>
+                        <div class="dash-url"><i class="fa-solid fa-lock"></i> localhost:3000/dashboard.html
+                        </div>
+                    </div>
+                    <div class="dash-layout">
+                        <!-- Dashboard Lock Overlay -->
+                        <div class="dash-lock-overlay" id="dashLock">
+                            <div class="dash-lock-content">
+                                <i class="fa-solid fa-lock dash-lock-icon"></i>
+                                <h3 style="margin-bottom: 8px;">Dashboard Locked</h3>
+                                <p class="text-sm text-muted" style="margin-bottom: 20px;">Please login to access the
+                                    interactive dashboard preview.</p>
+                                <a href="/auth/login" class="btn btn-discord btn-full">
+                                    <i class="fa-brands fa-discord"></i> Login to Unlock
+                                </a>
+                            </div>
+                        </div>
+                        <aside class="dash-sidebar">
+                            <h4 class="sidebar-title">Settings</h4>
+                            <button class="dash-menu-item active" data-target="dash-general"><i
+                                    class="fa-solid fa-gear"></i> General</button>
+                            <button class="dash-menu-item" data-target="dash-music"><i class="fa-solid fa-play"></i>
+                                Music Player</button>
+                            <button class="dash-menu-item" data-target="dash-mod"><i
+                                    class="fa-solid fa-user-shield"></i> Moderation</button>
+                            <button class="dash-menu-item" data-target="dash-analytics"><i
+                                    class="fa-solid fa-chart-simple"></i> Analytics</button>
+                        </aside>
+                        <main class="dash-main custom-scroll" id="dash-content-area"></main>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Support Section -->
+        <section id="support" class="section-padding target-reveal">
+            <div class="container support-container">
+                <div class="support-card">
+                    <i class="fa-solid fa-mug-hot text-brand" style="font-size: 2.5rem; margin-bottom: 1.5rem;"></i>
+                    <h2>Support Musico's Development</h2>
+                    <p class="mb-4 text-muted">Musico is 100% free with absolutely no paywalls. As server loads
+                        increase, scaling costs add up. Consider leaving a small tip.</p>
+                    <div class="upi-box">
+                        <div class="upi-label">UPI ID</div>
+                        <div class="upi-value">why.so@ptaxis</div>
+                    </div>
+                    <button class="btn btn-outline" id="copy-upi-btn" style="margin-top: 1rem;">
+                        <i class="fa-regular fa-copy"></i> Copy UPI ID
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo"><i class="fa-solid fa-shapes text-brand"></i> Musico</div>
+                    <p class="text-muted text-sm mt-4">The next generation platform for Discord automation, moderation,
+                        and AI intelligence.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Product</h4>
+                    <a href="#features">Features</a>
+                    <a href="#commands">Commands</a>
+                    <a href="#support">Support</a>
+                    <a href="#" onclick="showModal(event, 'System Status')">Status</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <a href="#" onclick="showModal(event, 'Community Server')">Support Server</a>
+                    <a href="#" onclick="showModal(event, 'GitHub Repository')">GitHub Repo</a>
+                    <a href="#" onclick="showModal(event, 'Developer API')">API Docs</a>
+                    <a href="#" onclick="showModal(event, 'Engineering Blog')">Blog</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="cookie.html">Cookie Policy</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Musico Technologies. All Rights Reserved. Not affiliated with Discord Inc.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="comingSoonModal" class="modal-overlay" onclick="if(event.target === this) closeModal('comingSoonModal')">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <div></div>
+                <button class="modal-close" onclick="closeModal('comingSoonModal')"><i
+                        class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="text-center">
+                <div class="modal-icon text-brand mb-4"><i class="fa-solid fa-person-digging text-2xl"></i></div>
+                <h3 class="mb-2">Coming Soon</h3>
+                <p class="text-muted text-sm mb-4">We are actively building the <strong class="text-white"
+                        id="modalPageName"></strong> page. Check back soon!</p>
+                <button class="btn btn-primary btn-full" onclick="closeModal('comingSoonModal')">Understood</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Banned Words Modal -->
+    <div id="bannedWordsModal" class="modal-overlay" onclick="if(event.target === this) closeModal('bannedWordsModal')">
+        <div class="modal-dialog" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3 class="flex items-center gap-2 m-0"><i class="fa-solid fa-shield-halved text-red"></i> Strict
+                    Blacklist</h3>
+                <button class="modal-close" onclick="closeModal('bannedWordsModal')"><i
+                        class="fa-solid fa-xmark"></i></button>
+            </div>
+            <p class="text-muted text-sm mb-4 mt-4">Messages matching these precise strings or regex patterns are
+                silently dropped.</p>
+            <div class="flex gap-2 mb-4">
+                <input type="text" placeholder="Add word or regex pattern..." class="input-field" style="flex-grow: 1;">
+                <button class="btn btn-outline"
+                    onclick="alert('This is a frontend demonstration. Your input would normally save to the JSON database.')">Add</button>
+            </div>
+            <div class="custom-scroll list-container">
+                <div class="list-item"><span>discord.gg/*</span><button class="text-red hover-bright"
+                        onclick="this.parentElement.style.display='none'"><i class="fa-solid fa-trash"></i></button>
+                </div>
+                <div class="list-item"><span>t.me/*</span><button class="text-red hover-bright"
+                        onclick="this.parentElement.style.display='none'"><i class="fa-solid fa-trash"></i></button>
+                </div>
+                <div class="list-item"><span>free-nitro</span><button class="text-red hover-bright"
+                        onclick="this.parentElement.style.display='none'"><i class="fa-solid fa-trash"></i></button>
+                </div>
+                <div class="list-item"><span>steamcommunity-gifts.com</span><button class="text-red hover-bright"
+                        onclick="this.parentElement.style.display='none'"><i class="fa-solid fa-trash"></i></button>
+                </div>
+                <div class="list-item"><span>fack</span><button class="text-red hover-bright"
+                        onclick="this.parentElement.style.display='none'"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Server Select Modal -->
+    <div id="serverSelectModal" class="modal-overlay"
+        onclick="if(event.target === this) closeModal('serverSelectModal')">
+        <div class="modal-dialog" style="max-width: 500px; padding: 0;">
+            <div class="modal-header"
+                style="padding: 1.5rem; border-bottom: 1px solid var(--border-subtle); margin-bottom: 0;">
+                <h3 class="m-0 text-center" style="width: 100%;">Select a Server</h3>
+                <button class="modal-close" style="position: absolute; right: 1.5rem;"
+                    onclick="closeModal('serverSelectModal')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="custom-scroll" style="max-height: 400px; overflow-y: auto; padding: 1.5rem;">
+
+                <div class="server-card">
+                    <div class="server-icon placeholder">C</div>
+                    <div class="server-info">
+                        <h4>Coding Hub</h4>
+                        <p class="text-muted text-sm m-0">Owner &bull; Not Configured</p>
+                    </div>
+                    <a href="https://discord.com/oauth2/authorize?client_id=1466430209019351050&permissions=8&integration_type=0&scope=applications.commands+bot"
+                        target="_blank" class="btn btn-outline btn-sm"
+                        onclick="closeModal('serverSelectModal')">Invite</a>
+                </div>
+
+                <div class="server-card">
+                    <img src="https://cdn.discordapp.com/embed/avatars/1.png" alt="Server" class="server-icon">
+                    <div class="server-info">
+                        <h4>Gaming Lounge</h4>
+                        <p class="text-muted text-sm m-0">Administrator &bull; Active</p>
+                    </div>
+                    <button class="btn btn-primary btn-sm"
+                        onclick="closeModal('serverSelectModal'); document.querySelector('a[href=\'#dashboard\']').click();">Manage</button>
+                </div>
+
+                <div class="server-card">
+                    <img src="https://cdn.discordapp.com/embed/avatars/3.png" alt="Server" class="server-icon">
+                    <div class="server-info">
+                        <h4>Anime World</h4>
+                        <p class="text-muted text-sm m-0">Manager &bull; Active</p>
+                    </div>
+                    <button class="btn btn-primary btn-sm"
+                        onclick="closeModal('serverSelectModal'); document.querySelector('a[href=\'#dashboard\']').click();">Manage</button>
+                </div>
+
+                <div class="server-card">
+                    <img src="https://cdn.discordapp.com/embed/avatars/4.png" alt="Server" class="server-icon">
+                    <div class="server-info">
+                        <h4>Private Room</h4>
+                        <p class="text-muted text-sm m-0">Owner &bull; Not Configured</p>
+                    </div>
+                    <a href="https://discord.com/oauth2/authorize?client_id=1466430209019351050&permissions=8&integration_type=0&scope=applications.commands+bot"
+                        target="_blank" class="btn btn-outline btn-sm"
+                        onclick="closeModal('serverSelectModal')">Invite</a>
+                </div>
+
+            </div>
+            <div
+                style="background: rgba(0,0,0,0.5); padding: 1rem; border-top: 1px solid var(--border-subtle); text-align: center; border-radius: 0 0 16px 16px;">
+                <p class="text-muted text-sm m-0">Only showing servers where you have Manage Server or Administrator
+                    permissions.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Check real login status on homepage
+        fetch('/api/me').then(r => {
+            if (r.ok) return r.json();
+            throw new Error('not logged in');
+        }).then(user => {
+            const navAuth = document.getElementById('nav-auth');
+            const avatarUrl = user.avatar;
+            navAuth.innerHTML = `
+            <a href="dashboard.html" class="user-profile" style="text-decoration:none;">
+                <img src="${avatarUrl}" alt="${user.username}" class="user-avatar">
+                <span>${user.globalName || user.username}</span>
+                <i class="fa-solid fa-chevron-down text-muted" style="font-size:12px;margin-left:2px;"></i>
+            </a>
+        `;
+        }).catch(() => {
+            // Not logged in — keep default login button
+            // Show error if redirected back from failed OAuth
+            if (location.search.includes('auth=error')) {
+                const t = document.createElement('div');
+                t.innerHTML = '<div style="position:fixed;bottom:2rem;right:2rem;background:#1e1e2e;border:1px solid #f04747;border-radius:12px;padding:.75rem 1.25rem;color:#fff;font-size:.85rem;z-index:999;"><i class="fa-solid fa-circle-xmark" style="color:#f04747;"></i> &nbsp;Discord login failed. Please try again.</div>';
+                document.body.appendChild(t);
+                setTimeout(() => t.remove(), 5000);
+            }
+        });
+    </script>
+</body>
+
+</html>

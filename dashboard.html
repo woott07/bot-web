@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musico | Dashboard</title>
+    <meta name="description" content="Configure your Musico Discord bot settings from the web dashboard.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ── Dashboard Shell ── */
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            background: var(--bg-main);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dash-shell {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* ── App Sidebar ── */
+        .app-sidebar {
+            width: 256px;
+            min-width: 256px;
+            background: var(--bg-surface);
+            border-right: 1px solid var(--border-subtle);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .app-sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .app-sidebar::-webkit-scrollbar-thumb {
+            background: var(--border-focus);
+            border-radius: 2px;
+        }
+
+        .sidebar-header {
+            padding: 1.25rem 1.25rem 1rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-logo i {
+            color: var(--brand);
+        }
+
+        /* Server picker */
+        .srv-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .srv-picker {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #000;
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            padding: 8px 10px;
+            cursor: pointer;
+            transition: border-color 0.2s;
+            width: 100%;
+        }
+
+        .srv-picker:hover {
+            border-color: var(--border-focus);
+        }
+
+        .srv-picker-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .srv-picker-ini {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--discord);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .srv-picker-name {
+            flex: 1;
+            font-size: 0.85rem;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: var(--text-primary);
+        }
+
+        /* Nav */
+        .sidebar-nav {
+            padding: 1rem 0;
+            flex: 1;
+        }
+
+        .nav-section-label {
+            padding: 0.4rem 1.25rem;
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 1.25rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            border-left: 2px solid transparent;
+            transition: all 0.15s;
+        }
+
+        .nav-item i {
+            width: 16px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        .nav-item:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .nav-item.active {
+            color: var(--brand);
+            background: rgba(59, 130, 246, 0.08);
+            border-left-color: var(--brand);
+        }
+
+        /* User footer */
+        .sidebar-footer {
+            border-top: 1px solid var(--border-subtle);
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar-footer img {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .sf-info {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .sf-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .sf-tag {
+            font-size: 0.72rem;
+            color: var(--text-secondary);
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 6px;
+            transition: color 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .logout-btn:hover {
+            color: var(--red);
+        }
+
+        /* ── Main ── */
+        .app-main {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .app-main::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .app-main::-webkit-scrollbar-thumb {
+            background: var(--border-focus);
+            border-radius: 3px;
+        }
+
+        .app-topbar {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(3, 3, 3, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .topbar-left h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .topbar-left p {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .save-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+
+        .save-indicator.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* ── Panels ── */
+        .dash-panels {
+            padding: 2rem;
+            max-width: 780px;
+        }
+
+        .panel {
+            display: none;
+        }
+
+        .panel.active {
+            display: block;
+        }
+
+        /* Card block */
+        .card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 1.25rem;
+        }
+
+        .card-head {
+            padding: 1.1rem 1.5rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .card-head h3 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 0 0 2px;
+        }
+
+        .card-head p {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .card-body {
+            padding: 0 1.5rem;
+        }
+
+        .card-body-pad {
+            padding: 1.25rem 1.5rem;
+        }
+
+        /* Setting row */
+        .s-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .s-row:last-child {
+            border-bottom: none;
+        }
+
+        .s-info h4 {
+            font-size: 0.855rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin: 0 0 3px;
+        }
+
+        .s-info p {
+            font-size: 0.775rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* ── Toggle Switch (matching site style) ── */
+        .toggle-wrap {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .toggle-wrap input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-track {
+            position: absolute;
+            inset: 0;
+            background: var(--border-focus);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.25s;
+        }
+
+        .toggle-wrap input:checked+.toggle-track {
+            background: var(--discord);
+        }
+
+        .toggle-track::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            transition: transform 0.25s;
+        }
+
+        .toggle-wrap input:checked+.toggle-track::after {
+            transform: translateX(20px);
+        }
+
+        /* ── Form Controls ── */
+        .num-input {
+            width: 68px;
+            text-align: center;
+            background: #000;
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            color: var(--text-primary);
+            padding: 6px 10px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            outline: none;
+        }
+
+        .num-input:focus {
+            border-color: var(--border-focus);
+        }
+
+        .ds-select {
+            background: #000;
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            color: var(--text-primary);
+            padding: 7px 12px;
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .ds-select:focus {
+            border-color: var(--border-focus);
+        }
+
+        .range-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .range-row input[type=range] {
+            accent-color: var(--brand);
+            width: 110px;
+        }
+
+        .range-val {
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            color: var(--brand);
+            min-width: 28px;
+            text-align: right;
+        }
+
+        /* Blacklist chips */
+        .bl-input-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .bl-input-row .input-field {
+            flex: 1;
+        }
+
+        .chips-wrap {
+            min-height: 36px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(88, 101, 242, 0.08);
+            border: 1px solid rgba(88, 101, 242, 0.25);
+            color: var(--discord);
+            border-radius: 20px;
+            padding: 3px 10px 3px 12px;
+            font-size: 0.775rem;
+            font-family: var(--font-mono);
+        }
+
+        .chip button {
+            background: none;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+            opacity: 0.6;
+            transition: opacity 0.15s;
+        }
+
+        .chip button:hover {
+            opacity: 1;
+        }
+
+        /* Stats cards */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .stat-tile {
+            background: #000;
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .stat-tile .val {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--brand);
+            font-family: var(--font-mono);
+        }
+
+        .stat-tile .lbl {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Overview server grid */
+        .srv-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .srv-tile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #000;
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            padding: 12px;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .srv-tile:hover {
+            border-color: var(--border-focus);
+        }
+
+        .srv-tile img,
+        .srv-tile .srv-ini {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            object-fit: cover;
+        }
+
+        .srv-tile .srv-ini {
+            background: var(--discord);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .srv-tile h4 {
+            font-size: 0.84rem;
+            margin: 0 0 3px;
+        }
+
+        .srv-tile p {
+            font-size: 0.72rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* Analytics bars */
+        .a-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 6px;
+            height: 80px;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .a-bar {
+            flex: 1;
+            border-radius: 3px 3px 0 0;
+            opacity: 0.85;
+            transition: opacity 0.2s;
+            cursor: default;
+        }
+
+        .a-bar:hover {
+            opacity: 1;
+        }
+
+        .a-labels {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .a-labels span {
+            font-size: 0.67rem;
+            color: var(--text-secondary);
+        }
+
+        /* ── Server Selector Modal ── */
+        .srv-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s;
+        }
+
+        .srv-modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .srv-modal-box {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            width: 520px;
+            max-width: 94vw;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            transform: scale(0.95);
+            transition: transform 0.25s;
+        }
+
+        .srv-modal-overlay.active .srv-modal-box {
+            transform: scale(1);
+        }
+
+        .srv-modal-head {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .srv-modal-head h3 {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .srv-modal-body {
+            overflow-y: auto;
+            padding: 1rem 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .srv-modal-body::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .srv-modal-body::-webkit-scrollbar-thumb {
+            background: var(--border-focus);
+            border-radius: 2px;
+        }
+
+        .srv-modal-foot {
+            padding: 0.85rem 1.5rem;
+            border-top: 1px solid var(--border-subtle);
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 0 0 16px 16px;
+            text-align: center;
+        }
+
+        /* Server row in modal */
+        .srv-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #000;
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            padding: 10px 14px;
+            transition: border-color 0.2s;
+        }
+
+        .srv-row:hover {
+            border-color: var(--border-focus);
+        }
+
+        .srv-row img,
+        .srv-row .srv-ini {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            object-fit: cover;
+        }
+
+        .srv-row .srv-ini {
+            background: var(--discord);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.82rem;
+        }
+
+        .srv-row-info {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .srv-row-info h4 {
+            font-size: 0.84rem;
+            margin: 0 0 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .srv-row-info p {
+            font-size: 0.72rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .srv-row-actions {
+            display: flex;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        /* Toast */
+        #toast {
+            position: fixed;
+            bottom: 1.75rem;
+            right: 1.75rem;
+            z-index: 999;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            padding: 10px 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.84rem;
+            color: var(--text-primary);
+            transform: translateY(80px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            pointer-events: none;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+        }
+
+        #toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        #toast.success i {
+            color: var(--brand);
+        }
+
+        #toast.error i {
+            color: var(--red);
+        }
+
+        /* Loading */
+        .loading-screen {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            z-index: 999;
+        }
+
+        .loading-screen .logo {
+            font-size: 1.5rem;
+        }
+
+        .spinner {
+            width: 36px;
+            height: 36px;
+            border: 2.5px solid var(--border-subtle);
+            border-top-color: var(--brand);
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Responsive */
+        @media(max-width: 768px) {
+            .app-sidebar {
+                width: 220px;
+                min-width: 220px;
+            }
+
+            .stats-row {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .srv-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dash-panels {
+                padding: 1.25rem;
+            }
+        }
+
+        @media(max-width: 560px) {
+            .dash-shell {
+                flex-direction: column;
+                height: auto;
+                overflow: auto;
+            }
+
+            .app-sidebar {
+                width: 100%;
+                min-width: unset;
+                border-right: none;
+                border-bottom: 1px solid var(--border-subtle);
+                max-height: 60px;
+                overflow: hidden;
+            }
+
+            body {
+                overflow: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="logo"><i class="fa-solid fa-shapes text-brand"></i> Musico</div>
+        <div class="spinner"></div>
+        <p class="text-muted text-sm">Verifying your session…</p>
+    </div>
+
+    <!-- App (shown after auth check) -->
+    <div class="dash-shell" id="dashShell" style="display:none;">
+
+        <!-- ── Sidebar ── -->
+        <aside class="app-sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="sidebar-logo">
+                    <i class="fa-solid fa-shapes"></i> Musico
+                </a>
+                <span class="srv-label">Active Server</span>
+                <button class="srv-picker" id="srvPickerBtn" onclick="openSrvModal()">
+                    <div class="srv-picker-ini" id="srvPickerIcon">?</div>
+                    <span class="srv-picker-name" id="srvPickerName">Select a server…</span>
+                    <i class="fa-solid fa-chevron-down text-muted" style="font-size:11px; flex-shrink:0;"></i>
+                </button>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section-label">Configuration</div>
+                <div class="nav-item active" data-panel="panel-overview">
+                    <i class="fa-solid fa-house"></i> Overview
+                </div>
+                <div class="nav-item" data-panel="panel-general">
+                    <i class="fa-solid fa-gear"></i> General
+                </div>
+                <div class="nav-item" data-panel="panel-music">
+                    <i class="fa-solid fa-music"></i> Music Player
+                </div>
+                <div class="nav-item" data-panel="panel-moderation">
+                    <i class="fa-solid fa-shield-halved"></i> Moderation
+                </div>
+                <div class="nav-section-label">Insights</div>
+                <div class="nav-item" data-panel="panel-analytics">
+                    <i class="fa-solid fa-chart-simple"></i> Analytics
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <img src="" alt="User" id="sfAvatar">
+                <div class="sf-info">
+                    <div class="sf-name" id="sfName">—</div>
+                    <div class="sf-tag" id="sfTag"></div>
+                </div>
+                <a href="/auth/logout" class="logout-btn" title="Logout">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </a>
+            </div>
+        </aside>
+
+        <!-- ── Main Content ── -->
+        <main class="app-main">
+            <!-- Topbar -->
+            <div class="app-topbar">
+                <div class="topbar-left">
+                    <h2 id="tbTitle">Overview</h2>
+                    <p id="tbSub">Your Musico dashboard</p>
+                </div>
+                <div class="save-indicator" id="saveIndicator">
+                    <span class="text-sm text-muted">Unsaved changes</span>
+                    <button class="btn btn-primary btn-sm" onclick="saveConfig()">
+                        <i class="fa-solid fa-floppy-disk"></i> Save
+                    </button>
+                </div>
+            </div>
+
+            <!-- Panels Container -->
+            <div class="dash-panels">
+
+                <!-- ── Overview ── -->
+                <div class="panel active" id="panel-overview">
+                    <div class="card" style="margin-bottom:1.25rem;">
+                        <div class="card-body-pad">
+                            <div style="display:flex; align-items:center; gap:12px; margin-bottom:1rem;">
+                                <img src="" alt="" id="ovAvatar" style="width:48px;height:48px;border-radius:50%;">
+                                <div>
+                                    <h3 style="margin:0 0 2px;" id="ovName">Welcome back!</h3>
+                                    <p class="text-muted text-sm" style="margin:0;">Select a server from the sidebar to
+                                        start configuring.</p>
+                                </div>
+                            </div>
+                            <div class="stats-row">
+                                <div class="stat-tile">
+                                    <div class="val" id="ov-guilds">—</div>
+                                    <div class="lbl">Manageable Servers</div>
+                                </div>
+                                <div class="stat-tile">
+                                    <div class="val">100%</div>
+                                    <div class="lbl">Bot Uptime</div>
+                                </div>
+                                <div class="stat-tile">
+                                    <div class="val">24ms</div>
+                                    <div class="lbl">Latency</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-head">
+                            <h3>Your Servers</h3>
+                            <p>Servers where you have Administrator or Manage Server permission.</p>
+                        </div>
+                        <div class="card-body-pad">
+                            <div class="srv-grid" id="ovSrvGrid">
+                                <div style="grid-column:1/-1; text-align:center; padding:1rem;">
+                                    <div class="spinner" style="margin:auto;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── General ── -->
+                <div class="panel" id="panel-general">
+                    <div class="card">
+                        <div class="card-head">
+                            <h3>Server Settings</h3>
+                            <p>Core bot configuration for your server.</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="s-row">
+                                <div class="s-info">
+                                    <h4>Auto-Mod Engine</h4>
+                                    <p>Automatically filter bad words and prevent spam.</p>
+                                </div>
+                                <label class="toggle-wrap">
+                                    <input type="checkbox" id="cfg-automod" onchange="markDirty()">
+                                    <div class="toggle-track"></div>
+                                </label>
+                            </div>
+                            <div class="s-row">
+                                <div class="s-info">
+                                    <h4>Logging System</h4>
+                                    <p>Log deleted messages, bans and mod actions.</p>
+                                </div>
+                                <label class="toggle-wrap">
+                                    <input type="checkbox" id="cfg-logging" onchange="markDirty()">
+                                    <div class="toggle-track"></div>
+                                </label>
+                            </div>
+                            <div class="s-row">
+                                <div class="s-info">
+                                    <h4>Welcome Messages</h4>
+                                    <p>Send a welcome message when someone joins the server.</p>
+                                </div>
+                                <label class="toggle-wrap">
+                                    <input type="checkbox" id="cfg-welcome" onchange="markDirty()">
+                                    <div class="toggle-track"></div>
+                                </label>
+                            </div>
+                            <div class="s-row">
+                                <div class="s-info">
+                                    <h4>Auto-Role on Join</h4>
+                                    <p>Automatically assign a role when a member joins.</p>
+                                </div>
+                                <select class="ds-select" id="cfg-autorole" onchange="markDirty()">
+                                    <option value="None">None</option>
+                                    <option value="@Member">@Member</option>
+                                    <option value="@Guest">@Guest</option>
+                                    <option value="@Verified">@Verified</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── Music ── -->
+                <div class="panel" id="panel-music">
+                    <div class="card">
+                        <div class="card-head">
+                            <h3>Music Player</h3>
+                            <p>Adjust audio quality and playback behaviour.</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="s-row">
+                                <div class="s-info">
+                                    <h4>Default Volume</h4>
+                                    <p>Baseline volume when the bot joins a channel.</p>
+                                </div>
+                                <div class="range-row">
+                                    <input type="range" min="1" max="100" value="100" id="cfg-volume"
+                                        oninput="document.getElementById('vol-val').textContent=this.value; markDirty()">
+                                    <span class="range-val" id="vol-val">100</span>
+                                </div>
+                            </div>
+                            <div class="s-row">
+                                <div class="s-info">
+                                    <h4>24/7 Presence</h4>
+                                    <p>Keep the bot in voice even when no one is listening.</p>
+                                </div>
+                                <label class="toggle-wrap">
+                                    <input type="checkbox" id="cfg-247" onchange="markDirty()">
+                                    <div class="toggle-track"></div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── Moderation ── -->
+                <div class="panel" id="panel-moderation">
+                    <div class="card" style="margin-bottom:1.25rem;">
+                        <div class="card-head">
+                            <h3>Moderation & Safety</h3>
+                            <p>Configure defensive rules and content filters.</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="s-row">
+                                <div class="s-info">
+                                    <h4>Spam Threshold</h4>
+                                    <p>Max messages allowed in a 3-second window.</p>
+                                </div>
+                                <input type="number" class="num-input" id="cfg-spam" value="5" min="3" max="20"
+                                    onchange="markDirty()">
+                            </div>
+                            <div class="s-row">
+                                <div class="s-info">
+                                    <h4>Mod Safety Mode</h4>
+                                    <p>Prevent moderators from being targeted by auto-mod.</p>
+                                </div>
+                                <label class="toggle-wrap">
+                                    <input type="checkbox" id="cfg-modsafety" onchange="markDirty()">
+                                    <div class="toggle-track"></div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-head">
+                            <h3>Word Blacklist</h3>
+                            <p>Messages matching these strings or patterns are automatically deleted.</p>
+                        </div>
+                        <div class="card-body-pad">
+                            <div class="bl-input-row">
+                                <input type="text" class="input-field" id="blInput"
+                                    placeholder="Add word or regex pattern…" style="flex:1;">
+                                <button class="btn btn-outline btn-sm" onclick="addWord()">
+                                    <i class="fa-solid fa-plus"></i> Add
+                                </button>
+                            </div>
+                            <div class="chips-wrap" id="chipsWrap"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── Analytics ── -->
+                <div class="panel" id="panel-analytics">
+                    <div class="card" style="margin-bottom:1.25rem;">
+                        <div class="card-head">
+                            <h3>Command Telemetry</h3>
+                            <p>Activity over the last 7 days.</p>
+                        </div>
+                        <div class="card-body-pad">
+                            <div class="a-chart" id="aChart"></div>
+                            <div class="a-labels" id="aLabels"></div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body-pad">
+                            <div class="stats-row">
+                                <div class="stat-tile">
+                                    <div class="val">47</div>
+                                    <div class="lbl">Commands Run</div>
+                                </div>
+                                <div class="stat-tile">
+                                    <div class="val">12</div>
+                                    <div class="lbl">Songs Played</div>
+                                </div>
+                                <div class="stat-tile">
+                                    <div class="val">3</div>
+                                    <div class="lbl">Mod Actions</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /dash-panels -->
+        </main>
+    </div>
+
+    <!-- Server Selector Modal -->
+    <div class="srv-modal-overlay" id="srvModal" onclick="if(event.target===this)closeSrvModal()">
+        <div class="srv-modal-box">
+            <div class="srv-modal-head">
+                <h3><i class="fa-solid fa-server text-brand"></i> &nbsp;Select a Server</h3>
+                <button class="modal-close" onclick="closeSrvModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="srv-modal-body" id="srvModalBody">
+                <div style="text-align:center; padding:2rem;">
+                    <div class="spinner" style="margin:auto;"></div>
+                </div>
+            </div>
+            <div class="srv-modal-foot">
+                <p class="text-sm text-muted" style="margin:0;">Only servers where you have Manage Server or
+                    Administrator permission.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast"><i class="fa-solid fa-check-circle"></i><span id="toastMsg">Saved!</span></div>
+
+    <script>
+        // ── State ─────────────────────────────────────────────────────────────────────
+        let user = null, guilds = [], selectedGuild = null, config = {}, dirty = false;
+
+        const BOT_INVITE = 'https://discord.com/oauth2/authorize?client_id=1466430209019351050&permissions=8&integration_type=0&scope=applications.commands+bot';
+
+        const PANEL_META = {
+            'panel-overview': ['Overview', 'Your Musico dashboard'],
+            'panel-general': ['General Settings', 'Core server configuration'],
+            'panel-music': ['Music Player', 'Audio & playback settings'],
+            'panel-moderation': ['Moderation', 'Filters, blacklists and limits'],
+            'panel-analytics': ['Analytics', 'Server command telemetry'],
+        };
+
+        // ── Boot ──────────────────────────────────────────────────────────────────────
+        window.addEventListener('DOMContentLoaded', async () => {
+
+            // Check session — handle failure gracefully instead of looping
+            let meRes, gRes;
+            try {
+                [meRes, gRes] = await Promise.all([fetch('/api/me'), fetch('/api/guilds')]);
+            } catch (networkErr) {
+                // Server not reachable
+                document.getElementById('loadingScreen').innerHTML = `
+                    <div class="logo"><i class="fa-solid fa-triangle-exclamation" style="color:var(--text-secondary)"></i></div>
+                    <p class="text-muted text-sm">Cannot reach the server. Is <code>node server.js</code> running?</p>
+                    <a href="/" class="btn btn-ghost btn-sm">Return Home</a>`;
+                return;
+            }
+
+            // Not logged in — show login prompt instead of redirecting (prevents loop)
+            if (!meRes.ok) {
+                document.getElementById('loadingScreen').innerHTML = `
+                    <div class="logo"><i class="fa-solid fa-shapes text-brand"></i> Musico</div>
+                    <p class="text-muted text-sm" style="margin-bottom:1rem;">Your session has expired or you are not logged in.</p>
+                    <a href="/auth/login" class="btn btn-discord">
+                        <i class="fa-brands fa-discord"></i> Login with Discord
+                    </a>
+                    <a href="/" class="btn btn-ghost btn-sm" style="margin-top:0.5rem;">Return Home</a>`;
+                return;
+            }
+
+            try {
+                user = await meRes.json();
+                guilds = await gRes.json();
+                populateUser();
+                renderOverview();
+                buildChart();
+                document.getElementById('loadingScreen').style.display = 'none';
+                document.getElementById('dashShell').style.display = 'flex';
+            } catch (parseErr) {
+                document.getElementById('loadingScreen').innerHTML = `
+                    <div class="logo"><i class="fa-solid fa-triangle-exclamation" style="color:var(--text-secondary)"></i></div>
+                    <p class="text-muted text-sm">Failed to load user data. <a href="/auth/login" style="color:var(--brand)">Try logging in again</a>.</p>`;
+                return;
+            }
+
+            // Navigation
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+                    item.classList.add('active');
+                    document.getElementById(item.dataset.panel)?.classList.add('active');
+                    const [title, sub] = PANEL_META[item.dataset.panel] || ['Dashboard', ''];
+                    document.getElementById('tbTitle').textContent = title;
+                    document.getElementById('tbSub').textContent = sub;
+                });
+            });
+
+            // Blacklist enter key
+            document.getElementById('blInput')?.addEventListener('keydown', e => { if (e.key === 'Enter') addWord(); });
+        });
+
+        // ── User ──────────────────────────────────────────────────────────────────────
+        function populateUser() {
+            document.getElementById('sfAvatar').src = user.avatar;
+            document.getElementById('sfName').textContent = user.globalName || user.username;
+            document.getElementById('sfTag').textContent = '@' + user.username;
+            document.getElementById('ovAvatar').src = user.avatar;
+            document.getElementById('ovName').textContent = 'Welcome back, ' + (user.globalName || user.username) + '!';
+            document.getElementById('ov-guilds').textContent = guilds.length;
+        }
+
+        // ── Overview ──────────────────────────────────────────────────────────────────
+        function renderOverview() {
+            const grid = document.getElementById('ovSrvGrid');
+            if (!guilds.length) {
+                grid.innerHTML = `<p class="text-muted text-sm" style="grid-column:1/-1;">No manageable servers found.</p>`;
+                return;
+            }
+            grid.innerHTML = guilds.map(g => `
+        <div class="srv-tile" onclick="selectGuild('${g.id}','${esc(g.name)}','${g.icon || ''}')">
+            ${g.icon ? `<img src="${g.icon}" alt="${esc(g.name)}">` : `<div class="srv-ini">${g.name[0].toUpperCase()}</div>`}
+            <div><h4>${esc(g.name)}</h4><p>${g.owner ? 'Owner' : 'Administrator'}</p></div>
+        </div>`).join('');
+        }
+
+        // ── Server Modal ──────────────────────────────────────────────────────────────
+        function openSrvModal() {
+            const body = document.getElementById('srvModalBody');
+            body.innerHTML = guilds.length ? guilds.map(g => `
+        <div class="srv-row">
+            ${g.icon ? `<img src="${g.icon}" alt="${esc(g.name)}">` : `<div class="srv-ini">${g.name[0].toUpperCase()}</div>`}
+            <div class="srv-row-info"><h4>${esc(g.name)}</h4><p>${g.owner ? 'Owner' : 'Administrator'}</p></div>
+            <div class="srv-row-actions">
+                <button class="btn btn-outline btn-sm" onclick="selectGuild('${g.id}','${esc(g.name)}','${g.icon || ''}')">
+                    <i class="fa-solid fa-sliders"></i> Manage
+                </button>
+            </div>
+        </div>`).join('') : `<p class="text-muted text-sm" style="padding:1rem;">No manageable servers found.</p>`;
+            document.getElementById('srvModal').classList.add('active');
+        }
+        function closeSrvModal() { document.getElementById('srvModal').classList.remove('active'); }
+
+        async function selectGuild(id, name, icon) {
+            closeSrvModal();
+            selectedGuild = { id, name, icon };
+
+            // Update picker
+            const iconEl = document.getElementById('srvPickerIcon');
+            if (icon) {
+                iconEl.outerHTML = `<img src="${icon}" alt="${esc(name)}" class="srv-picker-avatar" id="srvPickerIcon">`;
+            } else {
+                if (iconEl.tagName === 'IMG') {
+                    iconEl.outerHTML = `<div class="srv-picker-ini" id="srvPickerIcon">${name[0].toUpperCase()}</div>`;
+                } else { iconEl.textContent = name[0].toUpperCase(); }
+            }
+            document.getElementById('srvPickerName').textContent = name;
+
+            try {
+                const res = await fetch('/api/config/' + id);
+                config = await res.json();
+                applyUI();
+                toast('Loaded config for ' + name);
+            } catch (e) { toast('Failed to load config', true); }
+        }
+
+        // ── Config UI ─────────────────────────────────────────────────────────────────
+        function applyUI() {
+            setChk('cfg-automod', config.automod_enabled);
+            setChk('cfg-logging', config.logging_enabled);
+            setChk('cfg-welcome', config.welcome_enabled);
+            setChk('cfg-247', config.presence_247);
+            setChk('cfg-modsafety', config.mod_safety_enabled);
+            setVal('cfg-volume', config.default_volume);
+            document.getElementById('vol-val').textContent = config.default_volume || 100;
+            setVal('cfg-spam', config.spam_threshold);
+            document.getElementById('cfg-autorole').value = config.auto_role || 'None';
+            renderChips(config.banned_words || []);
+            dirty = false;
+            document.getElementById('saveIndicator').classList.remove('visible');
+        }
+        function setChk(id, v) { const el = document.getElementById(id); if (el) el.checked = !!v; }
+        function setVal(id, v) { const el = document.getElementById(id); if (el) el.value = v; }
+        function markDirty() {
+            if (!selectedGuild) return;
+            dirty = true;
+            document.getElementById('saveIndicator').classList.add('visible');
+        }
+
+        async function saveConfig() {
+            if (!selectedGuild) return toast('Select a server first', true);
+            const body = {
+                automod_enabled: document.getElementById('cfg-automod').checked,
+                logging_enabled: document.getElementById('cfg-logging').checked,
+                welcome_enabled: document.getElementById('cfg-welcome').checked,
+                presence_247: document.getElementById('cfg-247').checked,
+                mod_safety_enabled: document.getElementById('cfg-modsafety').checked,
+                default_volume: parseInt(document.getElementById('cfg-volume').value),
+                spam_threshold: parseInt(document.getElementById('cfg-spam').value),
+                auto_role: document.getElementById('cfg-autorole').value,
+                banned_words: config.banned_words || []
+            };
+            try {
+                const res = await fetch('/api/config/' + selectedGuild.id, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body)
+                });
+                config = (await res.json()).config;
+                dirty = false;
+                document.getElementById('saveIndicator').classList.remove('visible');
+                toast('Configuration saved!');
+            } catch (e) { toast('Failed to save. Try again.', true); }
+        }
+
+        // ── Blacklist ─────────────────────────────────────────────────────────────────
+        function renderChips(words) {
+            document.getElementById('chipsWrap').innerHTML = words.map((w, i) => `
+        <span class="chip">${esc(w)}<button onclick="removeWord(${i})" title="Remove"><i class="fa-solid fa-xmark"></i></button></span>`).join('');
+        }
+        function addWord() {
+            const inp = document.getElementById('blInput');
+            const w = inp.value.trim(); if (!w) return;
+            if (!config.banned_words) config.banned_words = [];
+            config.banned_words.push(w); inp.value = '';
+            renderChips(config.banned_words); markDirty();
+        }
+        function removeWord(i) {
+            config.banned_words.splice(i, 1);
+            renderChips(config.banned_words); markDirty();
+        }
+
+        // ── Analytics Chart ───────────────────────────────────────────────────────────
+        function buildChart() {
+            const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+            const data = [12, 28, 18, 35, 22, 41, 15];
+            const max = Math.max(...data);
+            const cols = ['var(--brand)', 'var(--discord)', 'var(--brand)', 'var(--discord)', 'var(--brand)', 'var(--discord)', 'var(--brand)'];
+            document.getElementById('aChart').innerHTML = data.map((v, i) =>
+                `<div class="a-bar" style="height:${(v / max) * 100}%;background:${cols[i]};" title="${v} commands on ${days[i]}"></div>`).join('');
+            document.getElementById('aLabels').innerHTML = days.map(d => `<span>${d}</span>`).join('');
+        }
+
+        // ── Toast ─────────────────────────────────────────────────────────────────────
+        function toast(msg, isError = false) {
+            const el = document.getElementById('toast');
+            el.className = isError ? 'error' : 'success';
+            el.querySelector('i').className = isError ? 'fa-solid fa-circle-xmark' : 'fa-solid fa-check-circle';
+            document.getElementById('toastMsg').textContent = msg;
+            el.classList.add('show');
+            setTimeout(() => el.classList.remove('show'), 3000);
+        }
+
+        // ── Util ──────────────────────────────────────────────────────────────────────
+        function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+    </script>
+</body>
+
+</html>

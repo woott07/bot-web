@@ -1,0 +1,13 @@
+# Dependencies
+backend/node_modules/
+
+# Secrets — NEVER commit these
+backend/.env
+
+# Logs
+backend/logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

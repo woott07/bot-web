@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service | Musico</title>
+    <meta name="description" content="Musico Bot Terms of Service — rules governing your use of the bot and dashboard.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .legal-wrap {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 7rem 5% 6rem;
+        }
+
+        .legal-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 12px;
+            border-radius: 99px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-subtle);
+            margin-bottom: 1.5rem;
+        }
+
+        .legal-wrap h1 {
+            font-size: 2.75rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .legal-meta {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .legal-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .legal-section h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legal-section h2 i {
+            color: var(--brand);
+            font-size: 0.9rem;
+        }
+
+        .legal-section p,
+        .legal-section li {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 0.6rem;
+        }
+
+        .legal-section ul {
+            padding-left: 1.25rem;
+            list-style: none;
+            margin-top: 0.5rem;
+        }
+
+        .legal-section ul li {
+            position: relative;
+            padding-left: 1.25rem;
+        }
+
+        .legal-section ul li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--brand);
+            font-size: 0.8rem;
+        }
+
+        .legal-footer-note {
+            margin-top: 3rem;
+            padding: 1.25rem 1.5rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .legal-footer-note a {
+            color: var(--brand);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="glow-orb top-left"></div>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-shapes text-brand"></i> Musico
+            </a>
+            <nav class="nav-links">
+                <a href="index.html#features">Features</a>
+                <a href="index.html#commands">Commands</a>
+                <a href="index.html#dashboard">Dashboard</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="index.html" class="btn btn-ghost btn-sm">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="legal-wrap">
+        <div class="legal-badge"><i class="fa-solid fa-file-contract"></i> Legal Document</div>
+        <h1>Terms of Service</h1>
+        <p class="legal-meta">Last updated: March 2026 &nbsp;·&nbsp; Musico Technologies</p>
+
+        <div class="legal-section">
+            <h2><i class="fa-solid fa-handshake"></i> 1. Acceptance of Terms</h2>
+            <p>By inviting the Musico Bot to your Discord server, interacting with it, or using the dashboard, you agree
+                to be bound by these Terms of Service. If you disagree with any part of the terms, do not use the bot or
+                dashboard.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2><i class="fa-solid fa-circle-check"></i> 2. Proper Usage</h2>
+            <p>Musico provides moderation, AI (via Gemini), and music streaming functionality. You agree not to:</p>
+            <ul>
+                <li>Use the bot to propagate spam or bypass Discord's Terms of Service.</li>
+                <li>Exploit AI commands (<code
+                        style="background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:4px;font-family:var(--font-mono);font-size:0.82rem;">/ask</code>)
+                    to generate harmful or illegal content.</li>
+                <li>Attempt to reverse‑engineer the underlying Python script executing the features.</li>
+                <li>Intentionally overload the bot's audio pipeline or API rate limits.</li>
+                <li>Use the dashboard OAuth session beyond its intended purpose of configuring your own servers.</li>
+            </ul>
+        </div>
+
+        <div class="legal-section">
+            <h2><i class="fa-solid fa-server"></i> 3. Service Availability</h2>
+            <p>While we strive for 100% uptime, you acknowledge that the bot operates on third-party servers and may be
+                subject to delays, interruptions, or errors outside of our control. We provide the bot "as is" and "as
+                available".</p>
+        </div>
+
+        <div class="legal-section">
+            <h2><i class="fa-solid fa-pen-to-square"></i> 4. User Content</h2>
+            <p>Any settings you create through commands — such as automod roles, warn tracking, poll questions, and
+                reminders — become part of your server's state file. You hold responsibility for what your users submit
+                via bot commands.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2><i class="fa-solid fa-triangle-exclamation"></i> 5. Limitation of Liability</h2>
+            <p>In no event shall the creators of Musico be liable for any indirect, incidental, or consequential damages
+                arising out of your use of or inability to use the bot, including actions taken by the Auto-mod system
+                in your server.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2><i class="fa-solid fa-rotate"></i> 6. Changes to These Terms</h2>
+            <p>We reserve the right to modify these Terms at any time. Continued use of the bot or dashboard after
+                changes constitutes acceptance of the new Terms.</p>
+        </div>
+
+        <div class="legal-footer-note">
+            <i class="fa-solid fa-circle-info text-brand"></i>&nbsp;
+            If you have any questions about these terms, please reach out via our <a href="#">Support Server</a>.
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                &copy; 2026 Musico Technologies. All Rights Reserved. Not affiliated with Discord Inc.
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

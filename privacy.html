@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | Musico</title>
+    <meta name="description" content="Musico Bot Privacy Policy — how we collect, use, and protect your data.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .legal-wrap {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 7rem 5% 6rem;
+        }
+
+        .legal-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 12px;
+            border-radius: 99px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-subtle);
+            margin-bottom: 1.5rem;
+        }
+
+        .legal-wrap h1 {
+            font-size: 2.75rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .legal-meta {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .legal-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .legal-section h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legal-section h2 i {
+            color: var(--brand);
+            font-size: 0.9rem;
+        }
+
+        .legal-section p,
+        .legal-section li {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 0.6rem;
+        }
+
+        .legal-section ul {
+            padding-left: 1.25rem;
+            list-style: none;
+            margin-top: 0.5rem;
+        }
+
+        .legal-section ul li {
+            position: relative;
+            padding-left: 1.25rem;
+        }
+
+        .legal-section ul li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--brand);
+            font-size: 0.8rem;
+        }
+
+        .legal-footer-note {
+            margin-top: 3rem;
+            padding: 1.25rem 1.5rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .legal-footer-note a {
+            color: var(--brand);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="glow-orb top-left"></div>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-shapes text-brand"></i> Musico
+            </a>
+            <nav class="nav-links">
+                <a href="index.html#features">Features</a>
+                <a href="index.html#commands">Commands</a>
+                <a href="index.html#dashboard">Dashboard</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="index.html" class="btn btn-ghost btn-sm">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="legal-wrap">
+        <div class="legal-badge"><i class="fa-solid fa-shield-halved"></i> Legal Document</div>
+        <h1>Privacy Policy</h1>
+        <p class="legal-meta">Last updated: March 2026 &nbsp;·&nbsp; Musico Technologies</p>
+
+        <div class="legal-section">
+            <h2><i class="fa-solid fa-database"></i> 1. Information We Collect</h2>
+            <p>Musico operates by collecting only the minimum Discord-provided data required to function. This includes:
+            </p>
+            <ul>
+                <li><strong style="color:var(--text-primary)">Server Data:</strong> Server IDs, Channel IDs, and Role
+                    IDs for configuration such as auto-mod setup, logging channels, and saved roles.</li>
+                <li><strong style="color:var(--text-primary)">User Data:</strong> User IDs to track warnings,
+                    infractions, and command usage statistics. Message content is temporarily scanned for auto-mod but
+                    is never stored.</li>
+                <li><strong style="color:var(--text-primary)">Dashboard OAuth:</strong> When you log in via Discord, we
+                    receive your Discord username, avatar, and the list of servers you manage. This data is stored only
+                    in your session cookie.</li>
+            </ul>
+        </div>
+
+        <div class="legal-section">
+            <h2><i class="fa-solid fa-gears"></i> 2. How We Use Information</h2>
+            <p>We use the gathered information solely to provide the core functionality of the bot and dashboard. For
+                example: logging warnings to your configuration, executing AI requests via Gemini, running server
+                metrics, and displaying your server list in the dashboard.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2><i class="fa-solid fa-lock"></i> 3. Data Storage and Security</h2>
+            <p>All structured configuration data (warnings, automod settings) is stored locally on secure JSON files in
+                our hosting environment. Dashboard sessions are managed via secure HTTP-only server-side session
+                cookies. We do not sell or share any user data with third-party companies.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2><i class="fa-solid fa-user-minus"></i> 4. Your Rights to Deletion</h2>
+            <p>If you kick the bot from your server, you may use Discord's integration settings. You may also contact
+                our support team to request a full manual wipe of your server's JSON configurations from our database.
+                Dashboard session data is automatically cleared on logout.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2><i class="fa-solid fa-rotate"></i> 5. Changes to This Policy</h2>
+            <p>We may update this Privacy Policy from time to time. We will notify users of any material changes by
+                posting an announcement in our support server or sending a broadcast message.</p>
+        </div>
+
+        <div class="legal-footer-note">
+            <i class="fa-solid fa-circle-info text-brand"></i>&nbsp;
+            If you have any questions about this policy, please reach out via our <a href="#">Support Server</a>.
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                &copy; 2026 Musico Technologies. All Rights Reserved. Not affiliated with Discord Inc.
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
