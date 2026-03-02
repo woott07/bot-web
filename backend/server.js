@@ -55,7 +55,13 @@ app.use(session({
 }));
 
 // Serve static files from the website folder (parent of backend/)
-app.use(express.static(path.join(__dirname, '..')));
+const publicPath = path.resolve(__dirname, '../');
+app.use(express.static(publicPath));
+
+// Also explicitly handle the root route (/) to serve index.html
+app.get('/', (req, res) => {
+    res.sendFile(path.join(publicPath, 'index.html'));
+});
 
 // ─── Auth Routes ─────────────────────────────────────────────────────────────
 
