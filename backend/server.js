@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 // ─── Discord OAuth Config ────────────────────────────────────────────────────
 const DISCORD_CLIENT_ID = process.env.DISCORD_CLIENT_ID;
 const DISCORD_CLIENT_SECRET = process.env.DISCORD_CLIENT_SECRET;
-const REDIRECT_URI = process.env.REDIRECT_URI || `http://localhost:${PORT}/auth/callback`;
+const REDIRECT_URI = process.env.REDIRECT_URI || `https://musico.up.railway.app/auth/callback`;
 
 // ─── Bot Data Files ───────────────────────────────────────────────────────────
 // Local:   reads from my-music-bot/data/ on your PC
