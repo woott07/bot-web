@@ -31,7 +31,7 @@ Musico is the next-generation platform for Discord automation, moderation, and A
 
 1. **Clone the repository:**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/woott07/bot-web
    cd Musicoweb
    ```
 
